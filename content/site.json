@@ -1,98 +1,126 @@
 {
-  "className": "Engenharia de Software - Católica SC",
-  "lastUpdated": "2026-07-27",
+  "className": "Engenharia de Software Turma B - 6ª Fase",
+  "lastUpdated": "2026-07-28",
+  "semesterStart": "2026-07-27",
+  "semesterEnd": "2026-12-18",
   "links": [
     {
-      "title": "Sala virtual",
-      "description": "Adicione aqui o link do AVA, Google Classroom ou Microsoft Teams.",
-      "url": "#"
-    },
-    {
-      "title": "Grade horária",
-      "description": "Link com a grade oficial da turma ou PDF com horários.",
-      "url": "#"
+      "title": "Agenda mensal",
+      "description": "Visão do mês inteiro com aulas e eventos da turma.",
+      "url": "#agenda"
     },
     {
       "title": "Calendário acadêmico",
-      "description": "Link com o calendário oficial da instituição.",
+      "description": "Adicione aqui o link oficial da Católica SC.",
       "url": "#"
+    },
+    {
+      "title": "AVA / sala virtual",
+      "description": "Adicione aqui o ambiente virtual oficial da turma.",
+      "url": "#"
+    }
+  ],
+  "weeklyClasses": [
+    {
+      "weekday": 1,
+      "title": "ANÁLISE, PROJETO E DESENVOLVIMENTO ÁGIL",
+      "description": "Aula presencial regular da turma.",
+      "type": "aula",
+      "time": "19:00",
+      "location": "Sala G008",
+      "teacher": "",
+      "frequency": "weekly"
+    },
+    {
+      "weekday": 2,
+      "title": "MANUTENÇÃO E MELHORIA DE SOFTWARE",
+      "description": "Aula presencial regular da turma.",
+      "type": "aula",
+      "time": "19:00",
+      "location": "Sala G008",
+      "teacher": "",
+      "frequency": "weekly"
+    },
+    {
+      "weekday": 3,
+      "title": "PROJETO DE APRENDIZAGEM COLABORATIVA EXTENSIONISTA VI - PAC ESOFT",
+      "description": "Aula presencial a cada 15 dias.",
+      "type": "aula",
+      "time": "19:00",
+      "location": "Sala G008",
+      "teacher": "",
+      "frequency": "biweekly",
+      "startDate": "2026-07-29"
+    },
+    {
+      "weekday": 4,
+      "title": "INTERNET DAS COISAS",
+      "description": "Aula presencial regular da turma.",
+      "type": "aula",
+      "time": "19:00",
+      "location": "Sala H002",
+      "teacher": "",
+      "frequency": "weekly"
+    },
+    {
+      "weekday": 5,
+      "title": "CIÊNCIA DE DADOS",
+      "description": "Aula presencial regular da turma.",
+      "type": "aula",
+      "time": "19:00",
+      "location": "Sala G008",
+      "teacher": "",
+      "frequency": "weekly"
     }
   ],
   "notices": [
     {
-      "title": "Bem-vindos ao portal da turma",
-      "description": "Use este espaço para concentrar avisos rápidos, mudanças de sala, lembretes de entrega e recados gerais.",
+      "title": "Semestre em andamento",
+      "description": "A Turma B da 6ª fase começou as aulas em 27/07/2026 e o período informado vai até 18/12/2026.",
       "priority": "alta",
-      "author": "Coordenação",
-      "date": "2026-07-27"
+      "author": "Administração da página",
+      "date": "2026-07-28"
     },
     {
-      "title": "Atualize os links oficiais",
-      "description": "Substitua os links fictícios de exemplo por AVA, calendário acadêmico, materiais compartilhados e grupos da turma.",
-      "priority": "média",
+      "title": "PAC ESOFT quinzenal",
+      "description": "A disciplina PAC ESOFT acontece presencialmente a cada 15 dias, sempre na sala G008.",
+      "priority": "alta",
       "author": "Administração da página",
-      "date": "2026-07-27"
+      "date": "2026-07-28"
     }
   ],
   "news": [
     {
-      "title": "Nova página da turma publicada",
-      "description": "A turma agora tem um ponto central para consultar eventos importantes e comunicados sem depender de login.",
+      "title": "Grade da Turma B publicada",
+      "description": "A agenda agora mostra a estrutura semanal da 6ª fase com geração automática de aulas.",
       "category": "Comunicado",
-      "date": "2026-07-27"
+      "date": "2026-07-28"
     },
     {
-      "title": "Sugestão de uso semanal",
-      "description": "Atualize os eventos da semana toda segunda-feira e use a seção de notícias para resumos ou avisos maiores.",
-      "category": "Dica",
-      "date": "2026-07-27"
+      "title": "Visão mensal disponível",
+      "description": "O site agora permite navegar pelos meses do semestre inteiro para consultar a agenda completa.",
+      "category": "Atualização",
+      "date": "2026-07-28"
     }
   ],
   "events": [
     {
-      "title": "Aula de Engenharia de Requisitos",
-      "description": "Tema: levantamento de requisitos e histórias de usuário.",
-      "type": "aula",
-      "date": "2026-08-03",
+      "title": "Início das aulas",
+      "description": "Primeira semana letiva da Turma B da 6ª fase.",
+      "type": "aviso",
+      "date": "2026-07-27",
       "time": "19:00",
-      "location": "Sala a definir",
-      "teacher": "Professor(a)"
-    },
-    {
-      "title": "Aula de Arquitetura de Software",
-      "description": "Tema: padrões arquiteturais e modularização.",
-      "type": "aula",
-      "date": "2026-08-05",
-      "time": "19:00",
-      "location": "Sala a definir",
-      "teacher": "Professor(a)"
-    },
-    {
-      "title": "Prova de Banco de Dados",
-      "description": "Conteúdo acumulado até a unidade atual.",
-      "type": "prova",
-      "date": "2026-08-20",
-      "time": "19:00",
-      "location": "Sala a definir",
-      "teacher": "Professor(a)"
-    },
-    {
-      "title": "Feriado / sem aula",
-      "description": "Ajuste conforme o calendário acadêmico oficial.",
-      "type": "feriado",
-      "date": "2026-09-07",
-      "time": "",
-      "location": "Sem aula",
+      "location": "Católica SC",
       "teacher": ""
     },
     {
-      "title": "Entrega de projeto integrador",
-      "description": "Adicione aqui marcos relevantes, seminários ou apresentações.",
+      "title": "Encerramento do período letivo informado",
+      "description": "Data final informada para as aulas do semestre.",
       "type": "aviso",
-      "date": "2026-09-15",
-      "time": "23:59",
-      "location": "Envio online",
-      "teacher": "Professor(a)"
+      "date": "2026-12-18",
+      "time": "22:30",
+      "location": "Católica SC",
+      "teacher": ""
     }
   ]
 }

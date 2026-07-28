@@ -12,12 +12,17 @@ const newsEl = document.getElementById("news-list");
 const linksEl = document.getElementById("links-list");
 const filtersEl = document.getElementById("filters");
 const lastUpdatedEl = document.getElementById("last-updated");
+const calendarGridEl = document.getElementById("calendar-grid");
+const calendarMonthLabelEl = document.getElementById("calendar-month-label");
+const calendarPrevButton = document.getElementById("calendar-prev");
+const calendarNextButton = document.getElementById("calendar-next");
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
 let activeFilter = "todos";
 let data = null;
+let calendarCursor = new Date(today.getFullYear(), today.getMonth(), 1);
 
 function parseDate(value) {
   return new Date(`${value}T00:00:00`);
@@ -40,8 +45,73 @@ function formatCardDate(value) {
   };
 }
 
+function formatIsoDate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function addDays(date, days) {
+  const next = new Date(date);
+  next.setDate(next.getDate() + days);
+  return next;
+}
+
+function buildRecurringEvents() {
+  const weeklyClasses = Array.isArray(data.weeklyClasses) ? data.weeklyClasses : [];
+  const semesterStart = data.semesterStart ? parseDate(data.semesterStart) : today;
+  const semesterEnd = data.semesterEnd ? parseDate(data.semesterEnd) : today;
+  const events = [];
+
+  weeklyClasses.forEach((subject) => {
+    if (subject.frequency === "biweekly") {
+      let cursor = parseDate(subject.startDate || data.semesterStart);
+
+      while (cursor <= semesterEnd) {
+        if (cursor >= semesterStart) {
+          events.push({
+            title: subject.title,
+            description: subject.description,
+            type: subject.type || "aula",
+            date: formatIsoDate(cursor),
+            time: subject.time || "",
+            location: subject.location || "",
+            teacher: subject.teacher || ""
+          });
+        }
+
+        cursor = addDays(cursor, 14);
+      }
+
+      return;
+    }
+
+    const weekday = Number(subject.weekday);
+    let cursor = new Date(semesterStart);
+    const diff = (weekday - cursor.getDay() + 7) % 7;
+    cursor = addDays(cursor, diff);
+
+    while (cursor <= semesterEnd) {
+      events.push({
+        title: subject.title,
+        description: subject.description,
+        type: subject.type || "aula",
+        date: formatIsoDate(cursor),
+        time: subject.time || "",
+        location: subject.location || "",
+        teacher: subject.teacher || ""
+      });
+
+      cursor = addDays(cursor, 7);
+    }
+  });
+
+  return events;
+}
+
 function normalizeEvents() {
-  return [...data.events].sort((a, b) => a.date.localeCompare(b.date));
+  return [...buildRecurringEvents(), ...(data.events || [])].sort((a, b) => a.date.localeCompare(b.date));
 }
 
 function getUpcomingEvents() {
@@ -85,10 +155,81 @@ function renderFilters() {
     button.addEventListener("click", () => {
       activeFilter = key;
       renderFilters();
+      renderCalendar();
       renderTimeline();
     });
     filtersEl.appendChild(button);
   });
+}
+
+function getFilteredEventsForMonth(date) {
+  const month = date.getMonth();
+  const year = date.getFullYear();
+
+  return normalizeEvents().filter((event) => {
+    const eventDate = parseDate(event.date);
+    const sameMonth = eventDate.getMonth() === month && eventDate.getFullYear() === year;
+    const sameType = activeFilter === "todos" || event.type === activeFilter;
+    return sameMonth && sameType;
+  });
+}
+
+function renderCalendar() {
+  const monthStart = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth(), 1);
+  const monthEnd = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 0);
+  const weekdayNames = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+  const startOffset = monthStart.getDay();
+  const totalCells = Math.ceil((startOffset + monthEnd.getDate()) / 7) * 7;
+  const monthEvents = getFilteredEventsForMonth(monthStart);
+  const eventsByDate = monthEvents.reduce((acc, event) => {
+    if (!acc[event.date]) {
+      acc[event.date] = [];
+    }
+
+    acc[event.date].push(event);
+    return acc;
+  }, {});
+
+  calendarMonthLabelEl.textContent = new Intl.DateTimeFormat("pt-BR", {
+    month: "long",
+    year: "numeric"
+  }).format(monthStart);
+
+  const cells = [];
+
+  weekdayNames.forEach((name) => {
+    cells.push(`<div class="calendar-weekday">${name}</div>`);
+  });
+
+  for (let index = 0; index < totalCells; index += 1) {
+    const cellDate = new Date(monthStart);
+    cellDate.setDate(1 - startOffset + index);
+    const iso = formatIsoDate(cellDate);
+    const dayEvents = eventsByDate[iso] || [];
+    const isOutside = cellDate.getMonth() !== monthStart.getMonth();
+    const isToday = iso === formatIsoDate(today);
+
+    cells.push(`
+      <article class="calendar-day ${isOutside ? "is-outside" : ""} ${isToday ? "is-today" : ""}">
+        <span class="calendar-day__number">${cellDate.getDate()}</span>
+        <div class="calendar-day__items">
+          ${dayEvents
+            .slice(0, 4)
+            .map(
+              (event) => `
+                <div class="calendar-chip calendar-chip--${event.type}">
+                  <strong>${event.time ? `${event.time} · ` : ""}${event.title}</strong>
+                </div>
+              `
+            )
+            .join("")}
+          ${dayEvents.length > 4 ? `<div class="calendar-chip">+${dayEvents.length - 4} itens</div>` : ""}
+        </div>
+      </article>
+    `);
+  }
+
+  calendarGridEl.innerHTML = cells.join("");
 }
 
 function renderTimeline() {
@@ -190,6 +331,7 @@ function renderAll() {
   renderMetrics();
   renderLastUpdated();
   renderFilters();
+  renderCalendar();
   renderTimeline();
   renderNotices();
   renderNews();
@@ -222,3 +364,13 @@ async function loadData() {
 }
 
 loadData();
+
+calendarPrevButton.addEventListener("click", () => {
+  calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() - 1, 1);
+  renderCalendar();
+});
+
+calendarNextButton.addEventListener("click", () => {
+  calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 1);
+  renderCalendar();
+});
