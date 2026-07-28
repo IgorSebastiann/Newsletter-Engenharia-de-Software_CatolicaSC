@@ -1,0 +1,98 @@
+{
+  "className": "Engenharia de Software - Católica SC",
+  "lastUpdated": "2026-07-27",
+  "links": [
+    {
+      "title": "Sala virtual",
+      "description": "Adicione aqui o link do AVA, Google Classroom ou Microsoft Teams.",
+      "url": "#"
+    },
+    {
+      "title": "Grade horária",
+      "description": "Link com a grade oficial da turma ou PDF com horários.",
+      "url": "#"
+    },
+    {
+      "title": "Calendário acadêmico",
+      "description": "Link com o calendário oficial da instituição.",
+      "url": "#"
+    }
+  ],
+  "notices": [
+    {
+      "title": "Bem-vindos ao portal da turma",
+      "description": "Use este espaço para concentrar avisos rápidos, mudanças de sala, lembretes de entrega e recados gerais.",
+      "priority": "alta",
+      "author": "Coordenação",
+      "date": "2026-07-27"
+    },
+    {
+      "title": "Atualize os links oficiais",
+      "description": "Substitua os links fictícios de exemplo por AVA, calendário acadêmico, materiais compartilhados e grupos da turma.",
+      "priority": "média",
+      "author": "Administração da página",
+      "date": "2026-07-27"
+    }
+  ],
+  "news": [
+    {
+      "title": "Nova página da turma publicada",
+      "description": "A turma agora tem um ponto central para consultar eventos importantes e comunicados sem depender de login.",
+      "category": "Comunicado",
+      "date": "2026-07-27"
+    },
+    {
+      "title": "Sugestão de uso semanal",
+      "description": "Atualize os eventos da semana toda segunda-feira e use a seção de notícias para resumos ou avisos maiores.",
+      "category": "Dica",
+      "date": "2026-07-27"
+    }
+  ],
+  "events": [
+    {
+      "title": "Aula de Engenharia de Requisitos",
+      "description": "Tema: levantamento de requisitos e histórias de usuário.",
+      "type": "aula",
+      "date": "2026-08-03",
+      "time": "19:00",
+      "location": "Sala a definir",
+      "teacher": "Professor(a)"
+    },
+    {
+      "title": "Aula de Arquitetura de Software",
+      "description": "Tema: padrões arquiteturais e modularização.",
+      "type": "aula",
+      "date": "2026-08-05",
+      "time": "19:00",
+      "location": "Sala a definir",
+      "teacher": "Professor(a)"
+    },
+    {
+      "title": "Prova de Banco de Dados",
+      "description": "Conteúdo acumulado até a unidade atual.",
+      "type": "prova",
+      "date": "2026-08-20",
+      "time": "19:00",
+      "location": "Sala a definir",
+      "teacher": "Professor(a)"
+    },
+    {
+      "title": "Feriado / sem aula",
+      "description": "Ajuste conforme o calendário acadêmico oficial.",
+      "type": "feriado",
+      "date": "2026-09-07",
+      "time": "",
+      "location": "Sem aula",
+      "teacher": ""
+    },
+    {
+      "title": "Entrega de projeto integrador",
+      "description": "Adicione aqui marcos relevantes, seminários ou apresentações.",
+      "type": "aviso",
+      "date": "2026-09-15",
+      "time": "23:59",
+      "location": "Envio online",
+      "teacher": "Professor(a)"
+    }
+  ]
+}
