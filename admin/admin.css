@@ -20,6 +20,7 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: "Inter", sans-serif;
+  overflow-x: hidden;
 }
 
 a {
@@ -31,6 +32,23 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid rgba(17, 17, 17, 0.28);
+  outline-offset: 2px;
 }
 
 .admin-page {
@@ -218,6 +236,7 @@ button {
   padding: 16px;
   border: 1px solid var(--line);
   border-radius: 20px;
+  min-width: 0;
 }
 
 .editor-item__actions {
@@ -241,5 +260,23 @@ button {
   .editor-card__header {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .admin-page {
+    width: min(100% - 14px, 1180px);
+  }
+
+  .login-panel,
+  .editor-card,
+  .toolbar,
+  .admin-header {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
