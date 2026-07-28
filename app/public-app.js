@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState, startTransition } from "https://esm.sh/react@18";
-import { createRoot } from "https://esm.sh/react-dom@18/client";
-import htm from "https://esm.sh/htm@3/react";
+import React, { useEffect, useMemo, useState, startTransition } from "react";
+import { createRoot } from "react-dom/client";
+import { html } from "htm/react";
 import {
   addDays,
   buildItemsForDate,
@@ -13,16 +13,16 @@ import {
   typeConfig,
 } from "./shared/site-data.js";
 
-const html = htm.bind(React.createElement);
+const TODAY_ISO = "2026-07-28";
 
 function PublicApp() {
   const [data, setData] = useState(null);
   const [error, setError] = useState("");
   const [calendarCursor, setCalendarCursor] = useState(() => {
-    const today = new Date();
+    const today = parseDate(TODAY_ISO) || new Date();
     return new Date(today.getFullYear(), today.getMonth(), 1);
   });
-  const [selectedDate, setSelectedDate] = useState("");
+  const [selectedDate, setSelectedDate] = useState(TODAY_ISO);
 
   useEffect(() => {
     let active = true;
@@ -42,9 +42,9 @@ function PublicApp() {
 
         startTransition(() => {
           setData(payload);
-          setSelectedDate(payload.semesterStart || formatIsoDate(new Date()));
-          const start = parseDate(payload.semesterStart) || new Date();
-          setCalendarCursor(new Date(start.getFullYear(), start.getMonth(), 1));
+          setSelectedDate(TODAY_ISO);
+          const today = parseDate(TODAY_ISO) || new Date();
+          setCalendarCursor(new Date(today.getFullYear(), today.getMonth(), 1));
           setError("");
         });
       } catch (loadError) {
@@ -70,8 +70,7 @@ function PublicApp() {
       return null;
     }
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
+    const today = parseDate(TODAY_ISO) || new Date();
 
     return normalizedEvents.find((event) => {
       const eventDate = parseDate(event.date);
@@ -88,9 +87,7 @@ function PublicApp() {
   }, [data, selectedDate]);
 
   const metrics = useMemo(() => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-
+    const today = parseDate(TODAY_ISO) || new Date();
     const upcoming = normalizedEvents.filter((event) => {
       const eventDate = parseDate(event.date);
       return eventDate && eventDate >= today;
@@ -106,8 +103,25 @@ function PublicApp() {
     };
   }, [data, normalizedEvents]);
 
+  const header = html`
+    <header className="site-header">
+      <a href="#home" className="brand">
+        <span className="brand__dot"></span>
+        <span>Radar da Turma</span>
+      </a>
+
+      <nav className="site-nav">
+        <a href="#agenda">Agenda</a>
+        <a href="#avisos">Avisos</a>
+        <a href="#links">Links</a>
+        <a href="/admin/" className="site-nav__admin">Admin</a>
+      </nav>
+    </header>
+  `;
+
   if (error) {
     return html`
+      ${header}
       <main className="page">
         <div className="empty-state">Nao foi possivel carregar o conteudo da newsletter.</div>
       </main>
@@ -116,6 +130,7 @@ function PublicApp() {
 
   if (!data) {
     return html`
+      ${header}
       <main className="page">
         <div className="empty-state">Carregando agenda...</div>
       </main>
@@ -123,21 +138,8 @@ function PublicApp() {
   }
 
   return html`
+    ${header}
     <main id="home" className="page">
-      <header className="site-header">
-        <a href="#home" className="brand">
-          <span className="brand__dot"></span>
-          <span>Radar da Turma</span>
-        </a>
-
-        <nav className="site-nav">
-          <a href="#agenda">Agenda</a>
-          <a href="#avisos">Avisos</a>
-          <a href="#links">Links</a>
-          <a href="/admin/" className="site-nav__admin">Admin</a>
-        </nav>
-      </header>
-
       <section className="hero">
         <div className="hero__copy">
           <p className="hero__eyebrow">${data.className || "Catolica SC | Engenharia de Software"}</p>
@@ -145,9 +147,10 @@ function PublicApp() {
           <p className="hero__text">
             A agenda agora concentra a visao do semestre inteiro e abre o conteudo completo de cada dia no clique.
           </p>
+
           <div className="hero__actions">
             <a href="#agenda" className="button button--solid">Abrir agenda</a>
-            <a href="#links" className="button button--ghost">Ver links</a>
+            <a href="#avisos" className="button button--ghost">Ver avisos</a>
           </div>
         </div>
 
@@ -199,16 +202,16 @@ function PublicApp() {
         <div className="section-body">
           <div className="section-heading">
             <div>
-              <p className="section-heading__eyebrow">Visao do semestre</p>
+              <p className="section-heading__eyebrow">Ordem de datas</p>
               <h2>Agenda da turma</h2>
             </div>
-            <p>Clique em um dia do calendario para abrir aulas, avisos e anotacoes daquela data.</p>
+            <p>Clique em um dia do calendario para abrir as informacoes daquela data.</p>
           </div>
 
           <div className="calendar-panel">
             <div className="calendar-panel__header">
               <div>
-                <p className="section-heading__eyebrow">Calendario</p>
+                <p className="section-heading__eyebrow">Visao mensal</p>
                 <h3>${formatMonthLabel(calendarCursor)}</h3>
               </div>
               <div className="calendar-nav">
@@ -228,7 +231,6 @@ function PublicApp() {
                 </button>
               </div>
             </div>
-
             <${CalendarGrid}
               data=${data}
               calendarCursor=${calendarCursor}
@@ -252,8 +254,9 @@ function PublicApp() {
               <p className="section-heading__eyebrow">Canal interno</p>
               <h2>Recados rapidos</h2>
             </div>
-            <p>Mensagens importantes continuam visiveis fora do calendario para consulta rapida.</p>
+            <p>Alteracoes de sala, lembretes de entrega e mensagens importantes continuam visiveis.</p>
           </div>
+
           <div className="stack">
             ${(data.notices || []).length
               ? [...data.notices]
@@ -288,8 +291,9 @@ function PublicApp() {
               <p className="section-heading__eyebrow">Atalhos</p>
               <h2>Links uteis</h2>
             </div>
-            <p>Os acessos da turma ficam reunidos num bloco simples, sem misturar com a agenda.</p>
+            <p>AVA, calendario academico e acessos rapidos ficam reunidos sem disputar espaco com a agenda.</p>
           </div>
+
           <div className="links-grid">
             ${(data.links || []).length
               ? data.links.map(
@@ -329,36 +333,33 @@ function CalendarGrid({ data, calendarCursor, selectedDate, onSelectDate }) {
   }
 
   return html`
-    <div className="calendar-wrap">
-      <div className="calendar-grid">
-        ${weekdays.map((label) => html`<span className="calendar-weekday" key=${label}>${label}</span>`)}
-        ${cells.map((cell) => {
-          const isOutside = cell.date.getMonth() !== calendarCursor.getMonth();
-          const isSelected = cell.iso === selectedDate;
-          const isToday = cell.iso === formatIsoDate(new Date());
-          const preview = cell.events[0]?.title || cell.notices[0]?.title || "Sem informacoes";
+    <div className="calendar-grid">
+      ${weekdays.map((label) => html`<div className="calendar-weekday" key=${label}>${label}</div>`)}
+      ${cells.map((cell) => {
+        const isOutside = cell.date.getMonth() !== calendarCursor.getMonth();
+        const isSelected = cell.iso === selectedDate;
+        const isToday = cell.iso === TODAY_ISO;
 
-          return html`
-            <button
-              key=${cell.iso}
-              type="button"
-              className=${`calendar-day ${isOutside ? "is-outside" : ""} ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}`}
-              onClick=${() => onSelectDate(cell.iso)}
-            >
-              <div className="calendar-day__top">
-                <span className="calendar-day__number">${cell.date.getDate()}</span>
-                <span className="calendar-day__count">${cell.count ? `${cell.count} item${cell.count === 1 ? "" : "s"}` : "Livre"}</span>
-              </div>
-              <div className="calendar-day__dots">
-                ${cell.events.some((event) => event.type === "aula") ? html`<span className="calendar-dot calendar-dot--aula"></span>` : null}
-                ${cell.events.some((event) => event.type === "prova") ? html`<span className="calendar-dot calendar-dot--prova"></span>` : null}
-                ${cell.notices.length ? html`<span className="calendar-dot calendar-dot--aviso"></span>` : null}
-              </div>
-              <div className="calendar-day__text">${preview}</div>
-            </button>
-          `;
-        })}
-      </div>
+        return html`
+          <button
+            key=${cell.iso}
+            type="button"
+            className=${`calendar-day ${isOutside ? "is-outside" : ""} ${isSelected ? "is-selected" : ""} ${isToday ? "is-today" : ""}`}
+            onClick=${() => onSelectDate(cell.iso)}
+          >
+            <div className="calendar-day__top">
+              <span className="calendar-day__number">${cell.date.getDate()}</span>
+              <span className="calendar-day__count">${cell.count ? `${cell.count} item${cell.count === 1 ? "" : "s"}` : "Livre"}</span>
+            </div>
+            <div className="calendar-day__dots">
+              ${cell.events.some((event) => event.type === "aula") ? html`<span className="calendar-dot calendar-dot--aula"></span>` : null}
+              ${cell.events.some((event) => event.type === "prova") ? html`<span className="calendar-dot calendar-dot--prova"></span>` : null}
+              ${cell.notices.length ? html`<span className="calendar-dot calendar-dot--aviso"></span>` : null}
+            </div>
+            <div className="calendar-day__text">${cell.events[0]?.title || cell.notices[0]?.title || "Sem informacoes"}</div>
+          </button>
+        `;
+      })}
     </div>
   `;
 }
@@ -380,7 +381,7 @@ function DayPanel({ selectedDate, selectedDay }) {
               (event, index) => html`
                 <article className="timeline-card" key=${`${event.title}-${event.date}-${index}`}>
                   <div className="timeline-card__date">
-                    <span className="timeline-card__day">${formatLongDate(event.date, { day: "2-digit" })}</span>
+                    <span className="timeline-card__day">${selectedDate.slice(-2)}</span>
                     <span className="timeline-card__month">${typeConfig[event.type]?.label || "Evento"}</span>
                   </div>
                   <div className="timeline-card__content">

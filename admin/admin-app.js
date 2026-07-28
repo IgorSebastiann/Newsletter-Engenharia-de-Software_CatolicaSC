@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState, startTransition } from "https://esm.sh/react@18";
-import { createRoot } from "https://esm.sh/react-dom@18/client";
-import htm from "https://esm.sh/htm@3/react";
+import React, { useEffect, useMemo, useState, startTransition } from "react";
+import { createRoot } from "react-dom/client";
+import { html } from "htm/react";
 import {
   addDays,
   buildItemsForDate,
@@ -11,8 +11,6 @@ import {
   parseDate,
   weekdayName,
 } from "../app/shared/site-data.js";
-
-const html = htm.bind(React.createElement);
 
 function AdminApp() {
   const [authenticated, setAuthenticated] = useState(false);
