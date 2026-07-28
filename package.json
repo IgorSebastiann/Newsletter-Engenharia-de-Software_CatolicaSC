@@ -1,0 +1,11 @@
+{
+  "name": "newsletter-engenharia-software",
+  "private": true,
+  "scripts": {
+    "vercel:dev": "vercel dev",
+    "vercel:dev:test": "vercel dev --listen 0.0.0.0:3000"
+  },
+  "devDependencies": {
+    "vercel": "^58.1.0"
+  }
+}

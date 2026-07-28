@@ -13,56 +13,7 @@
     <link rel="stylesheet" href="./admin.css" />
   </head>
   <body>
-    <main class="admin-page">
-      <header class="admin-header">
-        <div>
-          <p class="eyebrow">Painel privado</p>
-          <h1>Radar da turma</h1>
-        </div>
-        <a href="/">Voltar ao site</a>
-      </header>
-
-      <section id="login-view" class="login-layout">
-        <aside class="login-box login-box--blue">
-          <span>01</span>
-          <strong>Acesso</strong>
-          <p>Somente o admin entra com usuário e senha para editar o conteúdo público.</p>
-        </aside>
-
-        <section class="login-panel">
-          <p class="eyebrow">Entrar</p>
-          <h2>Login do administrador</h2>
-          <form id="login-form" class="login-form">
-            <label>
-              <span>Usuário</span>
-              <input name="username" type="text" required autocomplete="username" />
-            </label>
-            <label>
-              <span>Senha</span>
-              <input name="password" type="password" required autocomplete="current-password" />
-            </label>
-            <button type="submit">Entrar</button>
-            <p id="login-feedback" class="feedback"></p>
-          </form>
-        </section>
-      </section>
-
-      <section id="app-view" class="app-view is-hidden">
-        <div class="toolbar">
-          <div>
-            <p class="eyebrow">Status</p>
-            <strong id="save-status">Conteúdo carregado</strong>
-          </div>
-          <div class="toolbar__actions">
-            <button id="logout-button" class="button button--ghost" type="button">Sair</button>
-            <button id="save-button" class="button button--solid" type="button">Salvar alterações</button>
-          </div>
-        </div>
-
-        <div id="editor-root" class="editor-root"></div>
-      </section>
-    </main>
-
-    <script src="./admin.js"></script>
+    <div id="root"></div>
+    <script type="module" src="./admin-app.js"></script>
   </body>
 </html>
