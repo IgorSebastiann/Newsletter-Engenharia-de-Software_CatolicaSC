@@ -1,6 +1,6 @@
-{
+﻿{
   "className": "Engenharia de Software Turma B - 6ª Fase",
-  "lastUpdated": "2026-07-28",
+  "lastUpdated": "2026-07-31",
   "semesterStart": "2026-07-27",
   "semesterEnd": "2026-12-18",
   "links": [
@@ -11,7 +11,7 @@
     },
     {
       "title": "Calendário acadêmico",
-      "description": "Adicione aqui o link oficial da Católica SC.",
+      "description": "Calendário oficial usado como base para feriados e datas institucionais.",
       "url": "#"
     },
     {
@@ -79,38 +79,117 @@
       "description": "A Turma B da 6ª fase começou as aulas em 27/07/2026 e o período informado vai até 18/12/2026.",
       "priority": "alta",
       "author": "Administração da página",
-      "date": "2026-07-28"
+      "date": "2026-07-31"
     },
     {
       "title": "PAC ESOFT quinzenal",
       "description": "A disciplina PAC ESOFT acontece presencialmente a cada 15 dias, sempre na sala G008.",
       "priority": "alta",
       "author": "Administração da página",
-      "date": "2026-07-28"
+      "date": "2026-07-31"
+    },
+    {
+      "title": "Feriados do segundo semestre adicionados",
+      "description": "Os feriados nacionais e a paralisação institucional ainda válidos entre agosto e dezembro de 2026 foram adicionados ao calendário da turma.",
+      "priority": "média",
+      "author": "Administração da página",
+      "date": "2026-07-31"
     }
   ],
   "news": [
     {
-      "title": "Grade da Turma B publicada",
-      "description": "A agenda agora mostra a estrutura semanal da 6ª fase com geração automática de aulas.",
-      "category": "Comunicado",
-      "date": "2026-07-28"
+      "title": "Calendário acadêmico integrado",
+      "description": "A agenda agora inclui as principais datas institucionais e feriados do segundo semestre de 2026.",
+      "category": "Atualização",
+      "date": "2026-07-31"
     },
     {
-      "title": "Visão mensal disponível",
-      "description": "O site agora permite navegar pelos meses do semestre inteiro para consultar a agenda completa.",
-      "category": "Atualização",
+      "title": "Grade da Turma B publicada",
+      "description": "A agenda mostra a estrutura semanal da 6ª fase com geração automática de aulas.",
+      "category": "Comunicado",
       "date": "2026-07-28"
     }
   ],
   "events": [
     {
-      "title": "Início das aulas",
-      "description": "Primeira semana letiva da Turma B da 6ª fase.",
+      "title": "Prazo final para solicitação de transferência interna 20262.3",
+      "description": "Data acadêmica informada no calendário oficial.",
       "type": "aviso",
-      "date": "2026-07-27",
-      "time": "19:00",
-      "location": "Católica SC",
+      "date": "2026-08-06",
+      "time": "",
+      "location": "Calendário acadêmico",
+      "teacher": ""
+    },
+    {
+      "title": "Prazo final de rematrícula 20262.3",
+      "description": "Data acadêmica informada no calendário oficial.",
+      "type": "aviso",
+      "date": "2026-08-10",
+      "time": "",
+      "location": "Calendário acadêmico",
+      "teacher": ""
+    },
+    {
+      "title": "Prazo final para solicitação de trancamento de matrícula 20262.3",
+      "description": "Data acadêmica informada no calendário oficial.",
+      "type": "aviso",
+      "date": "2026-08-17",
+      "time": "",
+      "location": "Calendário acadêmico",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado nacional - Independência do Brasil",
+      "description": "Sem aulas regulares nesta data.",
+      "type": "feriado",
+      "date": "2026-09-07",
+      "time": "",
+      "location": "Brasil",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado nacional - Dia de Nossa Senhora Aparecida",
+      "description": "Sem aulas regulares nesta data.",
+      "type": "feriado",
+      "date": "2026-10-12",
+      "time": "",
+      "location": "Brasil",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado institucional - Dia do Professor e do Técnico Administrativo",
+      "description": "Antecipação indicada no calendário acadêmico oficial.",
+      "type": "feriado",
+      "date": "2026-10-13",
+      "time": "",
+      "location": "Instituição",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado nacional - Dia de Finados",
+      "description": "Sem aulas regulares nesta data.",
+      "type": "feriado",
+      "date": "2026-11-02",
+      "time": "",
+      "location": "Brasil",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado nacional - Proclamação da República",
+      "description": "Sem aulas regulares nesta data.",
+      "type": "feriado",
+      "date": "2026-11-15",
+      "time": "",
+      "location": "Brasil",
+      "teacher": ""
+    },
+    {
+      "title": "Feriado nacional - Dia Nacional de Zumbi e da Consciência Negra",
+      "description": "Sem aulas regulares nesta data.",
+      "type": "feriado",
+      "date": "2026-11-20",
+      "time": "",
+      "location": "Brasil",
       "teacher": ""
     },
     {
@@ -120,6 +199,15 @@
       "date": "2026-12-18",
       "time": "22:30",
       "location": "Católica SC",
+      "teacher": ""
+    },
+    {
+      "title": "Natal",
+      "description": "Feriado nacional após o encerramento do período letivo informado.",
+      "type": "feriado",
+      "date": "2026-12-25",
+      "time": "",
+      "location": "Brasil",
       "teacher": ""
     }
   ]
